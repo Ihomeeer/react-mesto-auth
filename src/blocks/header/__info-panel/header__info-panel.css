@@ -1,0 +1,17 @@
+.header__info-panel {
+  height: min-content;
+  width: min-content;
+  display: flex;
+  flex-direction: row;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+@media screen and (max-width: 567px) {
+  .header__info-panel {
+    flex-direction: column;
+  }
+}

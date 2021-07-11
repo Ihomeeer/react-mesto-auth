@@ -1,0 +1,12 @@
+.auth-form__text-container {
+  display: flex;
+  width: 100%;
+  min-height: 17px;
+  flex-direction: row;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  justify-content: center;
+}

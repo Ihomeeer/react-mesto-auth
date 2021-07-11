@@ -1,0 +1,14 @@
+.auth-form__sign-in-link {
+  margin-left: 5px;
+  text-align: center;
+  transition: opacity .4s;
+  height: 17px;
+  align-self: center;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+
+.auth-form__sign-in-link:hover {
+  opacity: .8;
+}

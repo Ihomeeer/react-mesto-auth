@@ -1,0 +1,21 @@
+.profile__avatar-container {
+  margin: 0 30px 0 0;
+  width: 120px;
+  height: 120px;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile__avatar-container:hover
+  .profile__avatar-overlay {
+    opacity: 1;
+  }
+
+
+@media screen and (max-width: 767px) {
+  .profile__avatar-container {
+    margin-right: 0;
+    margin-bottom: 22px;
+  }
+}
