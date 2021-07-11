@@ -4,8 +4,8 @@ import Header from './Header';
 function AuthForm(props) {
 
   const [userData, setUserData] = React.useState({
-    password: "",
-    email: ""
+    email: '',
+    password: ''
   })
 
   const handleUserDataChange = (e) => {
@@ -18,12 +18,12 @@ function AuthForm(props) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    props.onSubmit(userData.password, userData.email);
+    props.onSubmit( userData.email, userData.password);
   }
 
   return (
     <>
-      <Header isLoginPage={props.isLoginPage} handleHeaderBtn={props.handleHeaderBtn}/>
+      <Header buttonText={props.buttonText} handleHeaderBtn={props.handleHeaderBtn}/>
       <form  name="AuthForm" className="auth-form" onSubmit={handleFormSubmit} noValidate >
         <h2 className="auth-form__header">{props.title}</h2>
         <input type="email" name="email" id="authFormEmail" className="auth-form__input auth-form__input_type_email" placeholder="Email" value={userData.email} onChange={handleUserDataChange} minLength="2" maxLength="40" required />

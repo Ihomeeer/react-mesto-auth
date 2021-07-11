@@ -107,7 +107,8 @@ function App() {
       setCards([newCard, ...cards]);
       closeAllPopups();
     })
-    .catch((err) => {console.log(err)
+    .catch((err) => {
+      console.log(err)
     })
   }
   // установка лайков/дизлайков для карточек
@@ -119,7 +120,8 @@ function App() {
     .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     })
-    .catch((err) => {console.log(err)
+    .catch((err) => {
+      console.log(err)
     })
   }
   // подтверждение удаления карточки
@@ -129,7 +131,8 @@ function App() {
       setCards(cards => cards.filter(card => card._id !== selectedCardDelete));
       closeAllPopups();
     })
-    .catch((err) => {console.log(err)
+    .catch((err) => {
+      console.log(err)
     })
   }
 
@@ -140,37 +143,55 @@ function App() {
 
 
   //Регистрация нового пользователя
-  const handleRegister = (pasword, email) => {
-    auth.register(pasword, email)
+  const handleRegister = (email, password) => {
+    auth.register(email, password)
     .then(() => {
       history.push('/sign-in')
     })
-    .catch((err) => {console.log(err)
+    .catch((err) => {
+      console.log(err)
     })
-
   }
 
 
-  //Логин нового пользователя
-  const handleLogin = (pasword, email) => {
-    auth.authorization(pasword, email)
-    .then((responce) => {
-      console.log(responce)
-      if(responce.token) {
-        localStorage.setItem('token', responce.token);
-        console.log("111111111111111111111")
+
+
+
+
+  //Логин пользователя
+  const handleLogin = (email, password ) => {
+    auth.authorize(email, password)
+    .then((res) => {
+      console.log(res)
+      if (res.token) {
+        localStorage.setItem('token', res.token);
         setLoggedIn(true);
         history.push('/');
       }
     })
-    .catch((err) => {console.log(err)
+    .catch((err) => {
+      console.log(err)
     })
   }
 
+
+
+
+
   //проверка наличия и подлинности токена пользователя
   const checkToken = () => {
-    if (localStorage.getItem('token')){
-      const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    if (token) {
+      auth.checkUser(token)
+      .then((res) => {
+        console.log(res)
+        if (res.email)
+        setLoggedIn(true);
+        history.push('/');
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
     }
   }
 
@@ -195,7 +216,7 @@ function App() {
   }, [])
 
 
-  // Проверка авторизации при отрисовке старницы
+  // Проверка авторизации при отрисовке страницы
   React.useEffect(() => {
     checkToken();
   })
@@ -206,24 +227,13 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
 
         <Switch>
-          <ProtectedRoute exact path="/"
-            component={Main}
-            loggedIn={loggedIn}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleEditPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            cards={cards}
-            onCardLike={handleCardLike}
-            onCardDelete={handleDeleteConfirmClick}
-            onCardClick={handleCardClick}
-          />
-
           <Route exact path="/sign-up">
-            <Register
-              handleHeaderBtn={headerBtnSignUp}
-              handleRegister={handleRegister}
-              isLoggedIn={loggedIn}
-            />
+              <Register
+                handleHeaderBtn={headerBtnSignUp}
+                handleRegister={handleRegister}
+                isLoggedIn={loggedIn}
+                buttonText="Войти"
+              />
           </Route>
 
           <Route exact path="/sign-in">
@@ -231,8 +241,22 @@ function App() {
               handleHeaderBtn={headerBtnSignIn}
               handleLogin={handleLogin}
               isLoggedIn={loggedIn}
+              buttonText="Регистрация"
             />
           </Route>
+
+          <ProtectedRoute exact path="/"
+            loggedIn={loggedIn}
+            component={Main}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleEditPlaceClick}
+            onEditAvatar={handleEditAvatarClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleDeleteConfirmClick}
+            onCardClick={handleCardClick}
+            buttonText="Выйти"
+          />
 
           <Route path="*">
               <Redirect to="/" />

@@ -1,35 +1,45 @@
 export const BASE_URL = 'https://auth.nomoreparties.co';
 
 //Запрос для регистрации пользователя
-export const register = (password, email) => {
+export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({password, email})
+    body: JSON.stringify({email, password})
   })
   .then((response) => {
     checkStatus(response);
   })
 }
+
+
+
+
 
 
 //Запрос для авторизации пользователя
-export const authorization = (password, email) => {
+export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({password, email})
+    body: JSON.stringify({
+      password: password,
+      email: email
+    })
   })
+
   .then((response) => {
-    checkStatus(response);
+    return checkStatus(response);
   })
 }
+
+
+
 
 //Запрос для проверки валидности токена и получения email для вставки в шапку сайта
 export const checkUser = (token) => {
@@ -39,17 +49,16 @@ export const checkUser = (token) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       "Authorization" : `Bearer ${token}`
-    },
-    body: JSON.stringify({token})
+    }
   })
   .then((response) => {
-    checkStatus(response);
+    return checkStatus(response);
   })
 }
 
 //проверка состояния промиса, чтобы не писать одно и то же сто тыщ раз
 function checkStatus(res) {
-  if (res.ok) {
+  if (res.status === 200) {
     return res.json()
   }
   return Promise.reject(`Ошибка: ${res.status}`);

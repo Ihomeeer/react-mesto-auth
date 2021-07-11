@@ -10,10 +10,10 @@ return (
       <div className="header__info-panel">
         <p className="header__email"></p>
         <button
-          aria-label={props.isLoginPage ? "Регистрация" : "Войти"}
+          aria-label={props.buttonText}
           className="header__button"
           onClick={props.handleHeaderBtn}>
-            {props.isLoginPage ? "Регистрация" : "Войти"}
+            {props.buttonText}
         </button>
       </div>
     </header>

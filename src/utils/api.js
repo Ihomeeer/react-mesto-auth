@@ -70,9 +70,9 @@ class Api extends React.Component {
   //запрос на добавление лайка на сервер или его удаление
   toggleLike(isLiked, id) {
     return fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/likes/${id}`, {
-    method: isLiked ? 'DELETE' : 'PUT',
-    headers: this._headers
-    })
+      method: isLiked ? 'DELETE' : 'PUT',
+      headers: this._headers
+      })
     .then(res => this._checkStatus(res));
   }
 
