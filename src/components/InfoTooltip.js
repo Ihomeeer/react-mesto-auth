@@ -19,7 +19,7 @@ function InfoTooltip(props) {
   }, [props, props.isOpen]);
 
   return (
-    <div className={`popup info-tooltip ${props.isOpen ? 'popup_opened' : "" }`}>
+    <div className={`info-tooltip ${props.isOpen ? 'info-tooltip_opened' : "" }`}>
       <div className="info-tooltip__container">
       <button  onMouseDown={props.onClose} type="button" className="popup__close-button"></button>
         <img src={props.isSucces ? successPicRoute : failPicRoute} alt={props.isSucces ? "Успешная авторизация" : "Авторизация не произошла"} className="info-tooltip__picture"/>

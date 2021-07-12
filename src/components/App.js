@@ -146,17 +146,18 @@ function App() {
   //Регистрация нового пользователя
   const handleRegister = (email, password) => {
     auth.register(email, password)
-    .then((res) => {
-      if (res.data.email) {
-        console.log(res)
-        setIsRegistrationSuccess(true);
-        setIsInfoTooltipPopupOpen(true);
-        history.push('/sign-in')
-      }
+    .then(() => {
+      console.log(isRegistrationSuccess)
+      setIsRegistrationSuccess(true);
+      console.log(isRegistrationSuccess)
+      console.log(isInfoTooltipPopupOpen)
+      setIsInfoTooltipPopupOpen(true);
+      console.log(isInfoTooltipPopupOpen)
+      history.push('/sign-in')
     })
     .catch((err) => {
       setIsRegistrationSuccess(false);
-      setIsInfoTooltipPopupOpen(false);
+      setIsInfoTooltipPopupOpen(true);
       console.log(err)
     })
   }
