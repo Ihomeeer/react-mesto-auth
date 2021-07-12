@@ -9,6 +9,7 @@ function Register(props) {
     <AuthForm
       title="Регистрация"
       btnName="Зарегистрироваться"
+      buttonText={props.buttonText}
       isLoginPage={false}
       isLoggedIn={props.isLoggedIn}
       onSubmit={props.handleRegister}

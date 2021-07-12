@@ -8,6 +8,7 @@ function Login(props) {
     <AuthForm
       title="Вход"
       btnName="Вход"
+      buttonText={props.buttonText}
       isLoggedIn={props.isLoggedIn}
       onSubmit={props.handleLogin}
       isLoginPage={true}

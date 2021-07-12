@@ -31,8 +31,13 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   // хук для модалки с подтверждением удаления карточки
   const [selectedCardDelete, setSelectedCardDelete] = React.useState({});
+  // хуки для модалки со статусом регистрации
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
+  const [isRegistrationSuccess, setIsRegistrationSuccess] = React.useState(false);
   // хук для проверки логина пользователя;
   const [loggedIn, setLoggedIn] = React.useState(false);
+  // хук для подставления мыльца в верх странички, чтоб красиво было
+  const [email, setEmail] = React.useState('');
   // хук для данных пользователя
   const [currentUser, setCurrentUser] = React.useState({
     name: "",
@@ -64,15 +69,17 @@ function App() {
   }
   // открытие модалки с подтверждением удаления карточки
   const handleDeleteConfirmClick = (card) => {
-    setSelectedCardDelete(card)
-    setIsConfirmPopupOpen(true)
+    setSelectedCardDelete(card);
+    setIsConfirmPopupOpen(true);
   }
+
   // закрытие всех модалок оптом
   const closeAllPopups = () => {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsConfirmPopupOpen(false);
+    setIsInfoTooltipPopupOpen(false);
     setSelectedCard({});
     setSelectedCardDelete({});
   }
@@ -136,27 +143,23 @@ function App() {
     })
   }
 
-
-
-
-
-
-
   //Регистрация нового пользователя
   const handleRegister = (email, password) => {
     auth.register(email, password)
-    .then(() => {
-      history.push('/sign-in')
+    .then((res) => {
+      if (res.data.email) {
+        console.log(res)
+        setIsRegistrationSuccess(true);
+        setIsInfoTooltipPopupOpen(true);
+        history.push('/sign-in')
+      }
     })
     .catch((err) => {
+      setIsRegistrationSuccess(false);
+      setIsInfoTooltipPopupOpen(false);
       console.log(err)
     })
   }
-
-
-
-
-
 
   //Логин пользователя
   const handleLogin = (email, password ) => {
@@ -174,19 +177,15 @@ function App() {
     })
   }
 
-
-
-
-
   //проверка наличия и подлинности токена пользователя
   const checkToken = () => {
     const token = localStorage.getItem('token');
     if (token) {
       auth.checkUser(token)
       .then((res) => {
-        console.log(res)
-        if (res.email)
+        if (res.data.email)
         setLoggedIn(true);
+        setEmail(res.data.email);
         history.push('/');
       })
       .catch((err)=>{
@@ -199,11 +198,14 @@ function App() {
   const headerBtnSignIn = () => {
     history.push('/sign-up')
   }
-
   const headerBtnSignUp = () => {
     history.push('/sign-in')
   }
-
+  const handleLogout = () => {
+    setLoggedIn(false);
+    localStorage.removeItem('token');
+    history.push('/sign-in');
+  }
 
   // получение информации о пользователе и массива карточек при отрисовке страницы
   React.useEffect(() => {
@@ -255,6 +257,8 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleDeleteConfirmClick}
             onCardClick={handleCardClick}
+            email={email}
+            handleHeaderBtn={handleLogout}
             buttonText="Выйти"
           />
 
@@ -298,8 +302,9 @@ function App() {
 
         {/* Модалка с информированием об успешной или неуспешной регистрации */}
         <InfoTooltip
-          isSucces = "true"
-          isOpen = "true"
+          isOpen={isInfoTooltipPopupOpen}
+          onClose={closeAllPopups}
+          isSucces={isRegistrationSuccess}
         />
 
         <Footer />

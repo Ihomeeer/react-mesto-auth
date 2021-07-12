@@ -12,7 +12,7 @@ function Main(props) {
 
   return (
     <>
-    <Header buttonText={props.buttonText} handleHeaderBtn={props.handleHeaderBtn}/>
+    <Header buttonText={props.buttonText} handleHeaderBtn={props.handleHeaderBtn} email={props.email}/>
       <main className="page">
         <section className="profile">
           <div className="profile__info">

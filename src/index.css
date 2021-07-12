@@ -64,7 +64,7 @@
 @import url(./blocks/auth-form/__text-container/auth-form__text-container.css);
 @import url(./blocks/auth-form/__already-register/auth-form__already-register.css);
 @import url(./blocks/auth-form/__sign-in-link/auth-form__sign-in-link.css);
-@import url(./blocks/popup_type_info-tooltip/popup_type_info-tooltip.css);
-@import url(./blocks/popup_type_info-tooltip/__container/popup_type_info-tooltip__container.css);
-@import url(./blocks/popup_type_info-tooltip/__picture/popup_type_info-tooltip__picture.css);
-@import url(./blocks/popup_type_info-tooltip/__text/popup_type_info-tooltip__text.css);
+@import url(./blocks/info-tooltip/info-tooltip.css);
+@import url(./blocks/info-tooltip/__container/info-tooltip__container.css);
+@import url(./blocks/info-tooltip/__picture/info-tooltip__picture.css);
+@import url(./blocks/info-tooltip/__text/info-tooltip__text.css);

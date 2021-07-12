@@ -8,7 +8,7 @@ return (
     <header className="header">
       <img className="header__logo" src={headerLogoPath} alt="Логотип проекта" />
       <div className="header__info-panel">
-        <p className="header__email"></p>
+        <p className="header__email">{props.email}</p>
         <button
           aria-label={props.buttonText}
           className="header__button"

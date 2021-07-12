@@ -11,14 +11,9 @@ export const register = (email, password) => {
     body: JSON.stringify({email, password})
   })
   .then((response) => {
-    checkStatus(response);
+    return checkStatus(response);
   })
 }
-
-
-
-
-
 
 //Запрос для авторизации пользователя
 export const authorize = (email, password) => {
@@ -32,14 +27,10 @@ export const authorize = (email, password) => {
       email: email
     })
   })
-
   .then((response) => {
     return checkStatus(response);
   })
 }
-
-
-
 
 //Запрос для проверки валидности токена и получения email для вставки в шапку сайта
 export const checkUser = (token) => {
