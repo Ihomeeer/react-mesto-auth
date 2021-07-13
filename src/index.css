@@ -64,6 +64,8 @@
 @import url(./blocks/auth-form/__text-container/auth-form__text-container.css);
 @import url(./blocks/auth-form/__already-register/auth-form__already-register.css);
 @import url(./blocks/auth-form/__sign-in-link/auth-form__sign-in-link.css);
+@import url(./blocks/auth-form/__error-text/auth-form__error-text.css);
+@import url(./blocks/auth-form/__error-text/_active/auth-form__error-text_active.css);
 @import url(./blocks/info-tooltip/info-tooltip.css);
 @import url(./blocks/info-tooltip/_opened/info-tooltip_opened.css);
 @import url(./blocks/info-tooltip/__container/info-tooltip__container.css);

@@ -49,7 +49,7 @@ export const checkUser = (token) => {
 
 //проверка состояния промиса, чтобы не писать одно и то же сто тыщ раз
 function checkStatus(res) {
-  if (res.status === 200) {
+  if (res.status.ok) {
     return res.json()
   }
   return Promise.reject(`Ошибка: ${res.status}`);

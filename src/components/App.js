@@ -36,6 +36,7 @@ function App() {
   const [isRegistrationSuccess, setIsRegistrationSuccess] = React.useState(false);
   // хук для проверки логина пользователя;
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [isLoginError, setIsLoginError] = React.useState(false);
   // хук для подставления мыльца в верх странички, чтоб красиво было
   const [email, setEmail] = React.useState('');
   // хук для данных пользователя
@@ -170,10 +171,12 @@ function App() {
       if (res.token) {
         localStorage.setItem('token', res.token);
         setLoggedIn(true);
+        setIsLoginError(false);
         history.push('/');
       }
     })
     .catch((err) => {
+      setIsLoginError(true);
       console.log(err)
     })
   }
@@ -244,6 +247,7 @@ function App() {
               handleHeaderBtn={headerBtnSignIn}
               handleLogin={handleLogin}
               isLoggedIn={loggedIn}
+              isLoginError={isLoginError}
               buttonText="Регистрация"
             />
           </Route>
