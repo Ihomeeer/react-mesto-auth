@@ -14,7 +14,7 @@ function ImagePopup(props) {
     return () => {
         document.removeEventListener('keyup', handleEscClosePopup);
     }
-  });
+  }, [props.card.name]);
 
   return (
     <div className={`popup ${props.card.name ? 'popup_opened' : "" }`} name="popup_type_photo" id="photoPopup">

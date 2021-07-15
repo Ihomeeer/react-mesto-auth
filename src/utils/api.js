@@ -69,7 +69,7 @@ class Api extends React.Component {
 
   //запрос на добавление лайка на сервер или его удаление
   toggleLike(isLiked, id) {
-    return fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/likes/${id}`, {
+    return fetch(`${this._baseUrl}/v1/cohort-24/cards/likes/${id}`, {
       method: isLiked ? 'DELETE' : 'PUT',
       headers: this._headers
       })
@@ -78,7 +78,7 @@ class Api extends React.Component {
 
   //запрос на обновление аватара
   setAvatar(userData) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-24/users/me/avatar', {
+    return fetch(`${this._baseUrl}/v1/cohort-24/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify ({

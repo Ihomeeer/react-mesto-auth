@@ -13,7 +13,7 @@ function Login(props) {
         onSubmit={props.handleLogin}
         isLoginPage={true}
         handleHeaderBtn={props.handleHeaderBtn} >
-          <p className={`auth-form__error-text ${props.isOpen ? 'auth-form__error-text_active' : "" }`}>Неудачная попытка входа</p>
+          <p className={`auth-form__error-text ${props.isLoginError ? 'auth-form__error-text_active' : "" }`}>Неудачная попытка входа</p>
       </AuthForm>
   )
 }

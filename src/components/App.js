@@ -167,7 +167,6 @@ function App() {
   const handleLogin = (email, password ) => {
     auth.authorize(email, password)
     .then((res) => {
-      console.log(res)
       if (res.token) {
         localStorage.setItem('token', res.token);
         setLoggedIn(true);
@@ -187,10 +186,11 @@ function App() {
     if (token) {
       auth.checkUser(token)
       .then((res) => {
-        if (res.data.email)
-        setLoggedIn(true);
-        setEmail(res.data.email);
-        history.push('/');
+        if (res.data.email) {
+          setLoggedIn(true);
+          setEmail(res.data.email);
+          history.push('/');
+        }
       })
       .catch((err)=>{
         console.log(err);
@@ -225,7 +225,7 @@ function App() {
   // Проверка авторизации при отрисовке страницы
   React.useEffect(() => {
     checkToken();
-  })
+  }, [])
 
 
   return (

@@ -29,7 +29,7 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
   }
 
   return (
-    <li key={card._id} className="elements__card">
+    <li className="elements__card">
     <button type="button" className={cardDeleteButtonClassName} onClick={handleDelete}></button>
     <img src={card.link} alt={card.name} className="elements__photo" onClick={handleClick} />
     <div className="elements__info-panel">
